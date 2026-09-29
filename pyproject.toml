@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "vhook"
+version = "0.1.0"
+description = ""
+authors = ["Belokobylskiy Bogdan <BogdanBattle@mail.ru>"]
+readme = "README.md"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+rich = "^15.0.0"
+typer = "^0.27.2"
+yt-dlp = "^2026.8.19"
+bgutil-ytdlp-pot-provider = "^2.0.0"
+python-dotenv = "^1.2.3"
+pydantic = "^2.13.5"
+pydantic-settings = "^2.15.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
