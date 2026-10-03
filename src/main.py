@@ -1,12 +1,9 @@
 import typer
 
-import src.utilities as utilities
-from src.providers.youtube_provider import YoutubeProvider
 from src.config import get_settings
+from src.providers.youtube_provider import YoutubeProvider
 
-app = typer.Typer()
 
-@app.command()
 def main(
         url: str = typer.Option(None, '--url', help="URL of the resource"),
 ):
@@ -15,16 +12,17 @@ def main(
 
     provider = YoutubeProvider(api_key=get_settings().youtube_api_key)
 
-    format_container = utilities.get_formats(url=url)
+    format_info_container = provider.get_formats(url=url)
 
-    format_container.print_formats()
+    format_info_container.print_formats()
     chosen_formats = typer.prompt("Choose formats: ")
 
-    if not format_container.is_chosen_formats_valid(chosen_formats):
+    chosen_formats_from_container = format_info_container.get_format_ids(chosen_formats)
+    if not chosen_formats_from_container:
         pass
 
     options = {
-        "format": format_container.get_format_ids(chosen_formats),
+        "format": chosen_formats_from_container,
         "merge_output_format": "mp4",
     }
 

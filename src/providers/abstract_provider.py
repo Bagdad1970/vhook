@@ -9,3 +9,7 @@ class AbstractProvider(ABC):
     @abstractmethod
     def download_by_url(self, url: str, user_options: dict):
         pass
+
+    @abstractmethod
+    def get_formats(self, url: str):
+        pass

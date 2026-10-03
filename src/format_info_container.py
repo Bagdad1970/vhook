@@ -1,8 +1,10 @@
+import re
 from collections.abc import Iterator, Sequence
 from operator import attrgetter
 
 
-class FormatContainer(Sequence):
+class FormatInfoContainer(Sequence):
+    VALID_CHOSEN_FORMATS_PATTERN = re.compile(r"^\d+(\+\d+)*$")
 
     def __init__(self, format_infos: list):
         self.format_infos = format_infos
@@ -24,13 +26,31 @@ class FormatContainer(Sequence):
         for i, format_info in enumerate(self, start=1):
             print(f"{i}) {format_info}")
 
-    def is_chosen_formats_valid(self, chosen_formats: str):
-        unique_format_nums = set(chosen_formats.strip().replace(" ", "").split("+"))
 
-        return all([ 0 < int(format) <= len(self) for format in unique_format_nums ])
+    @staticmethod
+    def _normalize(formats: str):
+        return formats.strip().replace(" ", "")
 
-    def get_format_ids(self, formats: str):
-        splitted_format_indexes = formats.strip().replace(" ", "").split("+")
 
-        return '+'.join([ self[int(index) - 1].id for index in splitted_format_indexes ])
+    def _is_chosen_formats_valid(self, chosen_formats: str = ""):
+        normalized_chosen_formats = self._normalize(chosen_formats)
+        if not re.match(self.VALID_CHOSEN_FORMATS_PATTERN, normalized_chosen_formats):
+            return False
+
+        unique_format_nums = set(normalized_chosen_formats.split("+"))
+
+        return all(0 < int(n) <= len(self) for n in unique_format_nums)
+
+
+    def get_format_ids(self, formats: str = ""):
+        normalized_formats = self._normalize(formats)
+        if not normalized_formats:
+            return ''
+
+        if not self._is_chosen_formats_valid(normalized_formats):
+            raise ValueError(f"Invalid formats: {formats!r}")
+
+        unique = dict.fromkeys(normalized_formats.split("+"))
+
+        return '+'.join([ self[int(num) - 1].id for num in unique ])
 
