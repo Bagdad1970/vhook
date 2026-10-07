@@ -1,3 +1,7 @@
+# test scripts
+example*
+
+
 # Environments
 .env
 .venv
