@@ -8,8 +8,8 @@ class FormatResolutionType(IntEnum):
     VIDEO = 2
 
 
-@dataclass()
-class Format:
+@dataclass
+class FormatInfo:
     VIDEO_RESOLUTION_PATTERN = re.compile(r"^(\d+)x(\d+)$")
     AUDIO_RESOLUTION_PATTERN = "audio"
     AUDIO_EXTENSIONS = [ 'mp3', 'm4a' ]

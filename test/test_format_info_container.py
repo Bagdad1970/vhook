@@ -1,7 +1,7 @@
 import pytest
 
 from src.format_info_container import FormatInfoContainer
-from src.models.format_info import Format
+from src.models.format_info import FormatInfo
 
 
 @pytest.fixture(scope="function")
@@ -14,7 +14,7 @@ def format_container():
 
     format_infos = [ format_info1, format_info2, format_info3, format_info4, format_info5 ]
     
-    formats = [ Format.create_from_dict(format_info) for format_info in format_infos ]
+    formats = [FormatInfo.create_from_dict(format_info) for format_info in format_infos]
 
     return FormatInfoContainer(formats)
 

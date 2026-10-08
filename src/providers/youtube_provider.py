@@ -3,8 +3,8 @@ from googleapiclient.discovery import build
 
 import src.constant as constant
 from src.format_info_container import FormatInfoContainer
-from src.models.channel import VideoQuery, VideoInfo, ChannelInfo
-from src.models.format_info import Format
+from src.models import VideoQuery, VideoInfo, ChannelInfo
+from src.models.format_info import FormatInfo
 from src.providers.abstract_provider import AbstractProvider
 
 
@@ -44,7 +44,7 @@ class YoutubeProvider(AbstractProvider):
 
         format_infos = []
         for format_info in info['formats']:
-            format_infos.append(Format.create_from_dict(format_info))
+            format_infos.append(FormatInfo.create_from_dict(format_info))
 
         valid_format_infos = []
         for format_info in format_infos:
