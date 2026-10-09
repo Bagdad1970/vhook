@@ -94,14 +94,23 @@ class YoutubeProvider(AbstractProvider):
             batch_ids = []
             batch_items = []
             for item in playlist_response['items']:
-                # TODO firstly use title, id and published_at to filter batch
-                # then use next fields
-
                 video_info_dict = {
                     'title': item['snippet']['title'],
                     'id': item['snippet']['resourceId']['videoId'],
                     'published_at': item['snippet']['publishedAt']
                 }
+
+                """
+                TODO принцип следующий
+                1. берем батч видео
+                2. фильтруем по текущим полям
+                2.1 ВАЖНО проверям даты. если они есть, то надо запомнить позицию первого видео, котрое иметт published_date = from_date. затем ищем то видео, которое имеет published_date = to_date и является последним.
+                2.2 все остальные видео можно считать невалидными - цикл можно сразу завершать
+                2.3 если самое первое видео имеет published_date >= to_date т.е. видео выпущено позже, чем правая граница фильтра, можно сразу завершать цикл 
+                
+                тогда можно создать отдельный класс контейнер, который хранит и фильтрует входящие video_info_dict
+                он должен хранить video_info_dict, которые прошли фильтрацию,
+                """
 
                 batch_items.append(video_info_dict)
                 batch_ids.append(video_info_dict.get('id'))
