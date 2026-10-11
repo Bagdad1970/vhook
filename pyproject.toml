@@ -17,6 +17,7 @@ pydantic = "^2.13.5"
 pydantic-settings = "^2.15.0"
 pytest = "^9.1.1"
 isodate = "^0.7.2"
+google-api-python-client = "^2.201.0"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
