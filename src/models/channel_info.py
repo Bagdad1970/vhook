@@ -10,7 +10,7 @@ class ChannelInfo:
     playlist_id: str
 
     @classmethod
-    def create_from_dict(cls, channel_info: dict):
+    def from_dict(cls, channel_info: dict):
         return cls(
             id=channel_info['id'],
             title=channel_info['snippet']['title'],

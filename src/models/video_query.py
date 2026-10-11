@@ -8,8 +8,8 @@ from src.models.video_info import VideoInfo
 @dataclass
 class VideoQuery:
     search_pattern: str = ""
-    from_date: datetime.date = datetime.date(1, 1, 1)
-    to_date: datetime.date = datetime.date(9999, 12, 31)
+    from_date: datetime.date = None
+    to_date: datetime.date = None
     min_duration: datetime.timedelta = None
     max_duration: datetime.timedelta = None
 
