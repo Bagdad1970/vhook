@@ -1,6 +1,6 @@
 import pytest
 
-from src.models.format_info import FormatInfo, FormatResolutionType
+from core.models.format_info import FormatInfo, FormatResolutionType
 
 
 class TestFormat:

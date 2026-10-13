@@ -1,11 +1,11 @@
 import yt_dlp
 from googleapiclient.discovery import build
 
-import src.constant as constant
-from src.format_info_container import FormatInfoContainer
-from src.models import VideoInfo, ChannelInfo, VideoQuery
-from src.models.format_info import FormatInfo
-from src.providers.abstract_provider import AbstractProvider
+import core.constant as constant
+from core.format_info_container import FormatInfoContainer
+from core.models import VideoInfo, ChannelInfo, VideoQuery
+from core.models.format_info import FormatInfo
+from core.providers.abstract_provider import AbstractProvider
 
 
 class YoutubeProvider(AbstractProvider):

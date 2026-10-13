@@ -1,7 +1,7 @@
 import pytest
 
-from src.format_info_container import FormatInfoContainer
-from src.models.format_info import FormatInfo
+from core.format_info_container import FormatInfoContainer
+from core.models.format_info import FormatInfo
 
 
 @pytest.fixture(scope="function")

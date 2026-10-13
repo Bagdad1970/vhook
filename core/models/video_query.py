@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import datetime
 
-from src.models.video_info import VideoInfo
+from core.models.video_info import VideoInfo
 
 
 @dataclass

@@ -4,7 +4,7 @@ import datetime
 
 import isodate
 
-from src.utilities import create_youtube_url
+from core.utilities import create_youtube_url
 
 
 @dataclass

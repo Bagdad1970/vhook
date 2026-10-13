@@ -1,4 +1,4 @@
-from src.constant import YOUTUBE_URL_PREFIX
+from core.constant import YOUTUBE_URL_PREFIX
 
 
 VALID_EXTENSIONS = ["mp4", "m4a", "webm", "mp3"]
