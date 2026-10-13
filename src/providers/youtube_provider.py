@@ -3,7 +3,7 @@ from googleapiclient.discovery import build
 
 import src.constant as constant
 from src.format_info_container import FormatInfoContainer
-from src.models import VideoInfo, ChannelInfo
+from src.models import VideoInfo, ChannelInfo, VideoQuery
 from src.models.format_info import FormatInfo
 from src.providers.abstract_provider import AbstractProvider
 
@@ -71,7 +71,7 @@ class YoutubeProvider(AbstractProvider):
         return ChannelInfo.from_dict(channel_info)
 
 
-    def find_videos_by_query(self, channel: ChannelInfo, query=None):
+    def find_videos_by_query(self, channel: ChannelInfo, query: VideoQuery=None):
         videos = []
         next_page_token = None
 
@@ -99,7 +99,9 @@ class YoutubeProvider(AbstractProvider):
 
             video_infos = [ VideoInfo.from_dict(video_info_dict) for video_info_dict in batch_video_info_dicts ]
 
-            videos.extend(video_infos)
+            filtered_video_infos = [ video_info for video_info in video_infos if query.matches(video_info) ]
+
+            videos.extend(filtered_video_infos)
 
             next_page_token = playlist_response.get('nextPageToken')
             if not next_page_token:
